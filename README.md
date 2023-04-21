@@ -1,0 +1,1 @@
+This project is a simplified implementation of the C standard library function printf(). The printf() function is used to print formatted output to the console. The aim of this project is to give you a better understanding of how printf() works by implementing it yourself.
