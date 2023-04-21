@@ -1,70 +1,51 @@
-#include <stdarg.h>
 #include <stdio.h>
-#include "main.h"
+#include"main.h"
+#include <stdarg.h>
 /**
- * print_char - print character
- * @c:the character to be printed
- * Return:number of characters printed
- */
-int print_char(char c)
-{
-	putchar(c);
-	return (1);
-}
-/**
- * print_string - prints a string
- * @str:the string to be printed
- * Return:the number of characters printed
- */
-int print_string(char *str)
-{
-	int count = 0;
-
-	putchar(*str++);
-	count++;
-	return (count);
-}
-/**
- * _printf -  produces output according to a format.
- * @format:character string that contain c,%,s
- * Return:the no of characters printed (excluding the null byte)
+ * _printf - produces output according to a format.
+ * @format:character string
+ * Return:the number of characters printed (excluding the null byte)
  */
 int _printf(const char *format, ...)
 {
-	const char *p_format = format;
-	va_list arg;
-	int count = 0;
-	char *str, c;
-	int (*f_print_string)(char *) = &print_string;
+	va_list args;
+	int count = 0, c;
+	char *s;
 
-	va_start(arg, format);
-	while (*p_format != '\0')
+	va_start(args, format);
+	while (*format)
 	{
-		if (*p_format == '%')
+		if (*format == '%')
 		{
-			p_format++;
-			if (*p_format == 's')
+			format++;
+			if (*format == 'c')
 			{
-				str = va_arg(arg, char*);
-				count += f_print_string(str);
+				c = va_arg(args, int);
+				putchar(c);
+				count++;
 			}
-			if (*p_format == 'c')
+			else if (*format == 's')
 			{
-				c = va_arg(arg, int);
-				count += print_char(c);
+				s = va_arg(args, char *);
+				while (*s)
+				{
+					putchar(*s++);
+					count++;
+				}
 			}
-			else
+			else if (*format == '%')
 			{
-				putchar(*p_format);
+				putchar('%');
 				count++;
 			}
 		}
 		else
 		{
-			putchar(*p_format);
+			putchar(*format);
 			count++;
 		}
+		format++;
 	}
-	va_end(arg);
+	va_end(args);
 	return (count);
 }
