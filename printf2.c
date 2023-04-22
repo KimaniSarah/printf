@@ -1,58 +1,53 @@
-#include <stdio.h>
-#include"main.h"
+#include "main.h"
 #include <stdarg.h>
+#include <stdio.h>
 /**
- * digit_count - count how many digits are in h
- * @d:the number to be counted
- * Return:number of digits in d 
+ * number_to_binary - changes a number to binary code
+ * @h:the number to be changed to binary
+ * Return:binary number
  */
-int digit_count(int d)
+int number_to_binary(unsigned int h)
 {
-	int digits = 0;
-
-	if (d >= 9)
+	if (h == 0)
 	{
-		digits += digit_count(d / 10);
+		return (0);
 	}
-	putchar((d % 10) + '0');
-	digits++;
-	return (digits);
+	number_to_binary(h / 2);
+	putchar((h % 2) + '0');
+	return (0);
 }
 /**
- * _printf - produces output according to a format.
- * @format:character string
- * Return:the number of characters printed (excluding the null byte)
+ * _printf - the unsigned int argument is converted to binary
+ * @format:a string of characters
+ * Return: the number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int count = 0, d;
+	va_list arg;
+	int count = 0;
+	unsigned int h;
 
-	va_start(args, format);
+	va_start(arg, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 'd' || *format == 'i')
+			if (*format == 'b')
 			{
-				d = va_arg(args, int);
-				if (d < 0)
-				{
-					putchar('-');
-					count++;
-					d = -d;
-				}
-				count += digit_count(d);
+				h = va_arg(arg, int);
+				count += number_to_binary(h);
 			}
-		}
-		else
-		{
-			putchar(*format);
-			count++;
+			else
+			{
+				putchar(*format);
+				count++;
+			}
 		}
 		format++;
 	}
-	va_end(args);
+	va_end (arg);
+	putchar('\n');
+
 	return (count);
 }
