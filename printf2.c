@@ -4,7 +4,7 @@
 /**
  * digit_count - count how many digits are in h
  * @d:the number to be counted
- * Return:number of digits in h
+ * Return:number of digits in d 
  */
 int digit_count(int d)
 {
@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 	int count = 0, d;
 
 	va_start(args, format);
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
@@ -44,12 +44,6 @@ int _printf(const char *format, ...)
 					d = -d;
 				}
 				count += digit_count(d);
-			}
-			else
-			{
-				putchar('%');
-				putchar(*format);
-				count += 2;
 			}
 		}
 		else
