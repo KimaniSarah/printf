@@ -1,7 +1,6 @@
 #include "main.h"
-
-/************************* WRITE HANDLE *************************/
 /**
+ * Ben and Sarah
  * handle_write_char - Prints a string
  * @c: char types.
  * @buffer: Buffer array to handle print
@@ -9,20 +8,19 @@
  * @width: get width.
  * @precision: precision specifier
  * @size: Size specifier
- *
  * Return: Number of chars printed.
  */
 int handle_write_char(char c, char buffer[],
 	int flags, int width, int precision, int size)
-{ /* char is stored at left and paddind at buffer's right */
+{
 	int i = 0;
-	char padd = ' ';
+	char pado = ' ';
 
 	UNUSED(precision);
 	UNUSED(size);
 
 	if (flags & F_ZERO)
-		padd = '0';
+		pado = '0';
 
 	buffer[i++] = c;
 	buffer[i] = '\0';
@@ -31,7 +29,7 @@ int handle_write_char(char c, char buffer[],
 	{
 		buffer[BUFF_SIZE - 1] = '\0';
 		for (i = 0; i < width - 1; i++)
-			buffer[BUFF_SIZE - i - 2] = padd;
+			buffer[BUFF_SIZE - i - 2] = pado;
 
 		if (flags & F_MINUS)
 			return (write(1, &buffer[0], 1) +
@@ -43,8 +41,6 @@ int handle_write_char(char c, char buffer[],
 
 	return (write(1, &buffer[0], 1));
 }
-
-/************************* WRITE NUMBER *************************/
 /**
  * write_number - Prints a string
  * @is_negative: Lista of arguments
@@ -61,12 +57,12 @@ int write_number(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int length = BUFF_SIZE - ind - 1;
-	char padd = ' ', extra_ch = 0;
+	char pado = ' ', extra_ch = 0;
 
 	UNUSED(size);
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
-		padd = '0';
+		pado = '0';
 	if (is_negative)
 		extra_ch = '-';
 	else if (flags & F_PLUS)
@@ -75,7 +71,7 @@ int write_number(int is_negative, int ind, char buffer[],
 		extra_ch = ' ';
 
 	return (write_num(ind, buffer, flags, width, precision,
-		length, padd, extra_ch));
+		length, pado, extra_ch));
 }
 
 /**
@@ -200,7 +196,7 @@ int write_unsgnd(int is_negative, int ind,
  * @buffer: Arrays of chars
  * @ind: Index at which the number starts in the buffer
  * @length: Length of number
- * @width: Width specifier
+ * @width: Wwidth specifier
  * @flags: Flags specifier
  * @padd: Char representing the padding
  * @extra_c: Char representing extra char
@@ -250,4 +246,3 @@ int write_pointer(char buffer[], int ind, int length,
 		buffer[--ind] = extra_c;
 	return (write(1, &buffer[ind], BUFF_SIZE - ind - 1));
 }
-
