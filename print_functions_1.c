@@ -36,7 +36,8 @@ int print_unsigned(va_list types, char buffer[],
 
 /**
  * print_octal - Prints an unsigned
- * @types: Lista of argument
+ * @types: Lista of arguments
+ * Ben and Sarah
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width
@@ -78,6 +79,7 @@ int print_octal(va_list types, char buffer[],
 /**
  * print_hexadecimal - Prints an unsigned number in hexadecimal notation
  * @types: Lista of arguments
+ * Ben and Sarah
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width
@@ -95,6 +97,7 @@ int print_hexadecimal(va_list types, char buffer[],
 /**
  * print_hexa_upper - Prints an unsigned number in upper hexadecimal notation
  * @types: Lista of arguments
+ * Ben and Sarah
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width
@@ -112,6 +115,7 @@ int print_hexa_upper(va_list types, char buffer[],
 /**
  * print_hexa - Prints a hexadecimal number in lower or upper
  * @types: Lista of arguments
+ * Ben and Sarah
  * @map_to: Array of values to map the number to
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
