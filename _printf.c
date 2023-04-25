@@ -9,7 +9,7 @@ void print_buffer(char buffer[], int *buff_ind);
  */
 int _printf(const char *format, ...)
 {
-	int i, printed = 0, printed_chars = 0;
+	int q, printing = 0, printed_chars = 0;
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
@@ -19,29 +19,29 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 
-	for (i = 0; format && format[i] != '\0'; i++)
+	for (q = 0; format && format[q] != '\0'; q++)
 	{
-		if (format[i] != '%')
+		if (format[q] != '%')
 		{
-			buffer[buff_ind++] = format[i];
+			buffer[buff_ind++] = format[q];
 			if (buff_ind == BUFF_SIZE)
 				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
+			/* write(1, &format[q], 1);*/
 			printed_chars++;
 		}
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
-			++i;
-			printed = handle_print(format, &i, list, buffer,
+			flags = get_flags(format, &q);
+			width = get_width(format, &q, list);
+			precision = get_precision(format, &q, list);
+			size = get_size(format, &q);
+			++q;
+			printing = handle_print(format, &q, list, buffer,
 				flags, width, precision, size);
-			if (printed == -1)
+			if (printing == -1)
 				return (-1);
-			printed_chars += printed;
+			printed_chars += printing;
 		}
 	}
 
@@ -51,10 +51,10 @@ int _printf(const char *format, ...)
 
 	return (printed_chars);
 }
-
 /**
- * print_buffer - Prints the contents of the buffer if it exist
+ * print_buffer - the buffer if it exist
  * @buffer: Array of chars
+ * ben and sarah
  * @buff_ind: Index at which to add next char, represents the length.
  */
 void print_buffer(char buffer[], int *buff_ind)
@@ -64,4 +64,3 @@ void print_buffer(char buffer[], int *buff_ind)
 
 	*buff_ind = 0;
 }
-
